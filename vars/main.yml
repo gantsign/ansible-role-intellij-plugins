@@ -1,2 +1,6 @@
 ---
-# vars file for ansible-role-intellij-plugins
+# Temporary directory to store scripts
+intellij_plugins_tmp_dir: "{{ ansible_env.HOME + '/.ansible/tmp' }}"
+
+# Location of install script for plugins
+intellij_plugins_install_script: "{{ intellij_plugins_tmp_dir }}/install-intellij-plugins.sh"

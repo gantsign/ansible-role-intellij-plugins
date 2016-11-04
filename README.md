@@ -1,38 +1,125 @@
-Role Name
-=========
+Ansible Role: IntelliJ Plugins
+==============================
 
-A brief description of the role goes here.
+[![Build Status](https://travis-ci.org/gantsign/ansible-role-intellij-plugins.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-intellij-plugins)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-intellij-plugins/master/LICENSE)
+
+Role to download and install
+[IntelliJ IDEA](https://www.jetbrains.com/idea) plugins.
+
+**Warning:** this role relies on internal IntelliJ IDEA APIs and should be
+considered experimental at this time.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* Ansible >= 2.0
+
+* Linux Distribution
+
+    * Debian Family
+
+        * Ubuntu
+
+            * Xenial (16.04)
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+The following variables will change the behavior of this role (default values
+are shown below):
 
-Dependencies
-------------
+```yaml
+# Home directory of IntelliJ IDEA installation
+intellij_plugins_intellij_home: '{{ ansible_local.intellij.general.home }}'
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+# Directory name of user specific IntelliJ IDEA files
+intellij_plugins_intellij_user_dirname: '{{ ansible_local.intellij.general.user_dirname }}'
 
-Example Playbook
-----------------
+# Directory to store files downloaded for IntelliJ IDEA installation
+intellij_plugins_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+# List of users to configure IntelliJ IDEA for
+users: []
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Users are configured as follows:
+
+```yaml
+users:
+  - username: # Unix user name
+    intellij_plugins:
+      - # Plugin ID of plugin to install
+```
+
+Example Playbooks
+-----------------
+
+Minimal playbook:
+
+```yaml
+- hosts: servers
+  roles:
+    - role: gantsign.intellij
+      users:
+        - username: vagrant
+          intellij_plugins:
+            - CheckStyle-IDEA
+```
+
+Playbook with IntelliJ home and user dirname specified:
+
+```yaml
+- hosts: servers
+  roles:
+    - role: gantsign.intellij
+      intellij_plugins_intellij_home: '/opt/idea/idea-community-2016.2.5'
+      intellij_plugins_intellij_user_dirname: '.IdeaIC2016.2'
+      users:
+        - username: vagrant
+          intellij_plugins:
+            - CheckStyle-IDEA
+```
+
+More Roles From GantSign
+------------------------
+
+You can find more roles from GantSign on
+[Ansible Galaxy](https://galaxy.ansible.com/gantsign).
+
+Development & Testing
+---------------------
+
+This project uses [Molecule](http://molecule.readthedocs.io/) to aid in the
+development and testing; the role is unit tested using
+[Testinfra](http://testinfra.readthedocs.io/) and
+[pytest](http://docs.pytest.org/).
+
+To develop or test you'll need to have installed the following:
+
+* Linux (e.g. [Ubuntu](http://www.ubuntu.com/))
+* [Docker](https://www.docker.com/)
+* [Python](https://www.python.org/) (including python-pip)
+* [Ansible](https://www.ansible.com/)
+* [Molecule](http://molecule.readthedocs.io/)
+
+To run the role (i.e. the `tests/test.yml` playbook), and test the results
+(`tests/test_role.py`), execute the following command from the project root
+(i.e. the directory with `molecule.yml` in it):
+
+```bash
+molecule test
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+John Freeman
+
+GantSign Ltd.
+Company No. 06109112 (registered in England)
