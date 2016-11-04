@@ -1,5 +1,50 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
+
+  pre_tasks:
+    - name: create test_usr
+      become: yes
+      user:
+        name: test_usr
+        state: present
+        home: /home/test_usr
+        createhome: yes
+    - name: create test_usr2
+      become: yes
+      user:
+        name: test_usr2
+        state: present
+        home: /home/test_usr2
+        createhome: yes
+    - name: create test_usr3
+      become: yes
+      user:
+        name: test_usr3
+        state: present
+        home: /home/test_usr3
+        createhome: yes
+
+    - name: install jdk 8 (apt)
+      become: yes
+      apt:
+        name: openjdk-8-jdk
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
   roles:
-    - ansible-role-intellij-plugins
+    - role: gantsign.intellij
+      intellij_default_jdk_home: '/usr/lib/jvm/java-1.8.0-openjdk-amd64'
+      intellij_default_maven_home: '/test/maven/home'
+
+    - role: ansible-role-intellij-plugins
+      intellij_plugins_intellij_home: '/opt/idea/idea-community-2016.2.5'
+      intellij_plugins_intellij_user_dirname: '.IdeaIC2016.2'
+      users:
+        - username: test_usr
+          intellij_plugins:
+            - google-java-format
+            - Lombook Plugin
+        - username: test_usr2
+          intellij_plugins:
+        - username: test_usr3
