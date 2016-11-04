@@ -1,0 +1,15 @@
+---
+docker:
+  containers:
+
+      - name: ansible-role-intellij-plugins-01
+        image: ubuntu
+        image_version: latest
+        ansible_groups:
+          - group1
+
+      - name: ansible-role-intellij-plugins-02
+        image: ubuntu
+        image_version: latest
+        ansible_groups:
+          - group1
