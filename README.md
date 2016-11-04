@@ -61,7 +61,7 @@ Minimal playbook:
 ```yaml
 - hosts: servers
   roles:
-    - role: gantsign.intellij
+    - role: gantsign.intellij-plugins
       users:
         - username: vagrant
           intellij_plugins:
@@ -73,7 +73,7 @@ Playbook with IntelliJ home and user dirname specified:
 ```yaml
 - hosts: servers
   roles:
-    - role: gantsign.intellij
+    - role: gantsign.intellij-plugins
       intellij_plugins_intellij_home: '/opt/idea/idea-community-2016.2.5'
       intellij_plugins_intellij_user_dirname: '.IdeaIC2016.2'
       users:
