@@ -28,8 +28,6 @@
       intellij_default_maven_home: '/test/maven/home'
 
     - role: ansible-role-intellij-plugins
-      intellij_plugins_intellij_home: '/opt/idea/idea-community-2016.2.5'
-      intellij_plugins_intellij_user_dirname: '.IdeaIC2016.2'
       users:
         - username: test_usr
           intellij_plugins:

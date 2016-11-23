@@ -2,9 +2,25 @@
 ansible:
   playbook: tests/test.yml
   requirements_file: tests/requirements.yml
+  group_vars:
+    community:
+      - intellij_edition: community
+        intellij_plugins_intellij_home: '/opt/idea/idea-community-2016.2.5'
+        intellij_plugins_intellij_user_dirname: '.IdeaIC2016.2'
+    ultimate:
+      - intellij_edition: ultimate
+        intellij_plugins_intellij_home: '/opt/idea/idea-ultimate-2016.2.5'
+        intellij_plugins_intellij_user_dirname: '.IntelliJIdea2016.2'
 
 docker:
   containers:
-    - name: ansible-role-intellij-plugins-ubuntu-xenial
+    - name: ansible-role-intellij-plugins-community-ubuntu-xenial
+      ansible_groups:
+        - community
+      image: ubuntu
+      image_version: '16.04'
+    - name: ansible-role-intellij-ultimate-ubuntu-xenial
+      ansible_groups:
+        - ultimate
       image: ubuntu
       image_version: '16.04'

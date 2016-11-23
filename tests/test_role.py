@@ -11,7 +11,8 @@ testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
     'Go'
 ])
 def test_plugins_installed(Command, File, plugin_dir_name):
-    plugins_dir_pattern = '\\.IdeaIC[0-9]+\\.[0-9]/config/plugins$'
+    plugins_dir_pattern = (
+        '\\.(IdeaIC|IntelliJIdea)[0-9]+\\.[0-9]/config/plugins$')
     plugins_dir = Command.check_output('find %s | grep --color=never -E %s',
                                        '/home/test_usr',
                                        plugins_dir_pattern)
