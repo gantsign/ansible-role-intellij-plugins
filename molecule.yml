@@ -19,7 +19,7 @@ docker:
         - community
       image: ubuntu
       image_version: '16.04'
-    - name: ansible-role-intellij-ultimate-ubuntu-xenial
+    - name: ansible-role-intellij-plugins-ultimate-ubuntu-xenial
       ansible_groups:
         - ultimate
       image: ubuntu
