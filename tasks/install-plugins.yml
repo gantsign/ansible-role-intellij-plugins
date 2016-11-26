@@ -1,0 +1,32 @@
+---
+- name: install script dependencies
+  apt:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - curl
+    - dos2unix
+    - findutils
+    - gawk
+    - grep
+    - sed
+    - unzip
+    - xmlstarlet
+  when: ansible_pkg_mgr == 'apt'
+
+- name: write plugin install script
+  become: yes
+  template:
+    src: install-intellij-plugins.sh.j2
+    dest: "{{ intellij_plugins_install_script }}"
+    owner: root
+    group: root
+    mode: 'u=rwx,go='
+  changed_when: no
+
+- name: install plugins
+  become: yes
+  command: "{{ intellij_plugins_install_script }}"
+  register: plugins_result
+  changed_when: 'plugins_result.rc == 0'
+  failed_when: 'plugins_result.rc >= 2'
