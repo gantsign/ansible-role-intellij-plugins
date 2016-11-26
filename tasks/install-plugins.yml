@@ -12,7 +12,7 @@
     - sed
     - unzip
     - xmlstarlet
-  when: "ansible_pkg_mgr == 'apt' and users is defined and users not in (None, '', omit)"
+  when: ansible_pkg_mgr == 'apt'
 
 - name: write plugin install script
   become: yes
@@ -23,7 +23,6 @@
     group: root
     mode: 'u=rwx,go='
   changed_when: no
-  when: "users is defined and users not in (None, '', omit)"
 
 - name: install plugins
   become: yes
@@ -31,4 +30,3 @@
   register: plugins_result
   changed_when: 'plugins_result.rc == 0'
   failed_when: 'plugins_result.rc >= 2'
-  when: "users is defined and users not in (None, '', omit)"
