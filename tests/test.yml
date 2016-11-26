@@ -22,9 +22,26 @@
         state: present
       when: ansible_pkg_mgr == 'apt'
 
+    - name: install jdk 8 (yum)
+      become: yes
+      yum:
+        name: java-1.8.0-openjdk-devel
+        state: present
+      when: ansible_pkg_mgr == 'yum'
+
+    - name: set facts for openjdk location (apt)
+      set_fact:
+        jdk8_home: '/usr/lib/jvm/java-1.8.0-openjdk-amd64'
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: set facts for openjdk location (yum)
+      set_fact:
+        jdk8_home: '/usr/lib/jvm/java-1.8.0-openjdk'
+      when: ansible_pkg_mgr == 'yum'
+
   roles:
     - role: gantsign.intellij
-      intellij_default_jdk_home: '/usr/lib/jvm/java-1.8.0-openjdk-amd64'
+      intellij_default_jdk_home: '{{ jdk8_home }}'
       intellij_default_maven_home: '/test/maven/home'
 
     - role: ansible-role-intellij-plugins

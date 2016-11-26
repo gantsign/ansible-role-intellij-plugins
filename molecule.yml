@@ -24,3 +24,8 @@ docker:
         - ultimate
       image: ubuntu
       image_version: '16.04'
+    - name: ansible-role-intellij-plugins-community-centos-7
+      ansible_groups:
+      - community
+      image: centos
+      image_version: '7'
