@@ -1,6 +1,14 @@
 ---
+# XMLStarlet is only avilable in the EPEL
+- name: install epel-release (yum)
+  become: yes
+  yum:
+    name: epel-release
+    state: present
+  when: ansible_pkg_mgr == 'yum'
+
 - name: install script dependencies
-  apt:
+  package:
     name: '{{ item }}'
     state: present
   with_items:
@@ -12,7 +20,6 @@
     - sed
     - unzip
     - xmlstarlet
-  when: ansible_pkg_mgr == 'apt'
 
 - name: write plugin install script
   become: yes
@@ -24,9 +31,27 @@
     mode: 'u=rwx,go='
   changed_when: no
 
+# Workaround for: https://bugzilla.redhat.com/show_bug.cgi?id=1020147
+- name: enable sudo tty workaround
+  become: yes
+  copy:
+    content: "Defaults !requiretty\n"
+    dest: '{{ intellij_plugins_sudo_tty_workaround }}'
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  changed_when: no
+
 - name: install plugins
   become: yes
   command: "{{ intellij_plugins_install_script }}"
   register: plugins_result
   changed_when: 'plugins_result.rc == 0'
   failed_when: 'plugins_result.rc >= 2'
+
+- name: remove sudo tty workaround
+  become: yes
+  file:
+    path: '{{ intellij_plugins_sudo_tty_workaround }}'
+    state: absent
+  changed_when: no
