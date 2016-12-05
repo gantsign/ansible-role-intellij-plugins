@@ -1,7 +1,6 @@
 ---
 ansible:
   playbook: tests/test.yml
-  requirements_file: tests/requirements.yml
   group_vars:
     community:
       - intellij_edition: community
@@ -11,6 +10,10 @@ ansible:
       - intellij_edition: ultimate
         intellij_plugins_intellij_home: '/opt/idea/idea-ultimate-2016.2.5'
         intellij_plugins_intellij_user_dirname: '.IntelliJIdea2016.2'
+
+dependency:
+  name: galaxy
+  requirements_file: tests/requirements.yml
 
 docker:
   containers:
