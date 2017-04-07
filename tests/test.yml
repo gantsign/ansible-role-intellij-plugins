@@ -51,6 +51,7 @@
             - google-java-format
             - Lombook Plugin
             - ro.redeul.google.go
+            - com.dubreuia
         - username: test_usr2
           intellij_plugins:
         - username: test_usr3
