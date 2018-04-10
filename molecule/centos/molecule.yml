@@ -9,13 +9,18 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-intellij-plugins-community-ubuntu-xenial
+  - name: ansible-role-intellij-plugins-community-centos-7
     groups:
       - community
-    image: ubuntu:16.04
+    image: centos:7
 
 provisioner:
   name: ansible
+  playbooks:
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    prepare: ../default/prepare.yml
+    converge: ../default/playbook.yml
   inventory:
     group_vars:
       community:
@@ -26,9 +31,10 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: default
+  name: centos
 
 verifier:
   name: testinfra
+  directory: ../default/tests/
   lint:
     name: flake8
