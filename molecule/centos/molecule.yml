@@ -25,8 +25,8 @@ provisioner:
     group_vars:
       community:
         intellij_edition: community
-        intellij_plugins_intellij_home: '/opt/idea/idea-community-2016.2.5'
-        intellij_plugins_intellij_user_dirname: '.IdeaIC2016.2'
+        intellij_plugins_intellij_home: '/opt/idea/idea-community-2018.1'
+        intellij_plugins_intellij_user_dirname: '.IdeaIC2018.1'
   lint:
     name: ansible-lint
 

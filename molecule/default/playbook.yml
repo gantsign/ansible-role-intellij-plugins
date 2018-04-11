@@ -50,7 +50,6 @@
           intellij_plugins:
             - google-java-format
             - Lombook Plugin
-            - ro.redeul.google.go
             - com.dubreuia
         - username: test_usr2
           intellij_plugins:
