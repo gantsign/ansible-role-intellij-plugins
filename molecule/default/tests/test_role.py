@@ -9,8 +9,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 @pytest.mark.parametrize('plugin_dir_name', [
     'google-java-format',
-    'lombok-plugin',
-    'Go'
+    'lombok-plugin'
 ])
 def test_plugins_installed(Command, File, plugin_dir_name):
     plugins_dir_pattern = (
@@ -37,7 +36,7 @@ def test_jar_plugin_installed(Command, File):
 
     plugin_path = Command.check_output('find %s | grep --color=never -E %s',
                                        plugins_dir,
-                                       'save-actions_[0-9\\.]+.jar')
+                                       'save-actions-[0-9\\.]+.jar')
 
     plugin_file = File(plugin_path)
 
