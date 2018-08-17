@@ -17,9 +17,6 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    create: ../default/create.yml
-    destroy: ../default/destroy.yml
-    prepare: ../default/prepare.yml
     converge: ../default/playbook.yml
   inventory:
     group_vars:
