@@ -13,10 +13,10 @@ matrix:
         - ANSIBLE_VERSION=2.3.3
         - MOLECULE_SCENARIO=default
     - env:
-        - ANSIBLE_VERSION=2.4.4
+        - ANSIBLE_VERSION=2.6.3
         - MOLECULE_SCENARIO=centos
     - env:
-        - ANSIBLE_VERSION=2.4.4
+        - ANSIBLE_VERSION=2.6.3
         - MOLECULE_SCENARIO=ubuntu-ultimate
 
 # Require the standard build environment
