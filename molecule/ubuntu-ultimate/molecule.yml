@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-intellij-plugins-ultimate-ubuntu-xenial
+  - name: ansible-role-intellij-plugins-ultimate-ubuntu
     groups:
       - ultimate
     image: ubuntu:16.04
