@@ -23,7 +23,7 @@ def test_plugins_installed(host, plugin_dir_name):
     assert plugin_dir.is_directory
     assert plugin_dir.user == 'test_usr'
     assert plugin_dir.group == 'test_usr'
-    assert oct(plugin_dir.mode) == '0755'
+    assert plugin_dir.mode == 0o755
 
 
 def test_jar_plugin_installed(host):
@@ -45,4 +45,4 @@ def test_jar_plugin_installed(host):
     assert plugin_file.is_file
     assert plugin_file.user == 'test_usr'
     assert plugin_file.group == 'test_usr'
-    assert oct(plugin_file.mode) == '0664'
+    assert plugin_file.mode == 0o664
