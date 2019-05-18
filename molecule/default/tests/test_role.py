@@ -34,7 +34,7 @@ def test_jar_plugin_installed(host):
 
     plugins_dir = config_home + '/plugins/'
 
-    sa_plugin_pattern = 'intellij-plugin-save-actions-v?[0-9\\.]+.jar'
+    sa_plugin_pattern = 'intellij-plugin-save-actions-v?[0-9\\.\\+]+.jar'
     plugin_path = host.check_output('find %s | grep --color=never -E %s',
                                     plugins_dir,
                                     sa_plugin_pattern)
