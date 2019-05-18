@@ -13,6 +13,7 @@ platforms:
     groups:
       - community
     image: centos:7
+    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
