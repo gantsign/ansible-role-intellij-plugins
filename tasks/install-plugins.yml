@@ -18,7 +18,7 @@
   intellij_plugins_install:
     plugin_manager_url: '{{ intellij_plugins_manager_url }}'
     intellij_home: '{{ intellij_plugins_intellij_home }}'
-    intellij_user_dirname: '{{ intellij_plugins_intellij_user_dirname }}'
+    intellij_user_plugins_dir: '{{ intellij_plugins_intellij_user_plugins_dir }}'
     username: '{{ item.0.username }}'
     plugin_id: '{{ item.1 }}'
     download_cache: '{{ intellij_plugins_download_dir }}'
