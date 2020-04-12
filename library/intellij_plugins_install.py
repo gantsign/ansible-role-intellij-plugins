@@ -298,14 +298,13 @@ def download_plugin(module, plugin_url, file_name, download_cache):
                                                              info['msg']))
 
 
-def install_plugin(module, plugin_manager_url, intellij_home, intellij_user_dir,
+def install_plugin(module, plugin_manager_url, intellij_home, plugins_dir,
                    username, plugin_id, download_cache):
     plugin_url, file_name = get_plugin_info(module, plugin_manager_url,
                                             intellij_home, plugin_id)
 
     plugin_path = download_plugin(module, plugin_url, file_name, download_cache)
 
-    plugins_dir = os.path.join(intellij_user_dir, 'config', 'plugins')
     if not module.check_mode:
         mkdirs(module, plugins_dir, username, 0o775)
 
@@ -338,7 +337,7 @@ def run_module():
     module_args = dict(
         plugin_manager_url=dict(type='str', required=True),
         intellij_home=dict(type='path', required=True),
-        intellij_user_dirname=dict(type='path', required=True),
+        intellij_user_plugins_dir=dict(type='path', required=True),
         username=dict(type='str', required=True),
         plugin_id=dict(type='str', required=True),
         download_cache=dict(type='path', required=True))
@@ -348,8 +347,8 @@ def run_module():
     plugin_manager_url = module.params['plugin_manager_url']
     intellij_home = os.path.expanduser(module.params['intellij_home'])
     username = module.params['username']
-    intellij_user_dir = os.path.expanduser(
-        os.path.join('~' + username, module.params['intellij_user_dirname']))
+    intellij_user_plugins_dir = os.path.expanduser(
+        os.path.join('~' + username, module.params['intellij_user_plugins_dir']))
     plugin_id = module.params['plugin_id']
     download_cache = os.path.expanduser(module.params['download_cache'])
 
@@ -372,7 +371,7 @@ def run_module():
         )
 
     changed = install_plugin(module, plugin_manager_url, intellij_home,
-                             intellij_user_dir, username, plugin_id,
+                             intellij_user_plugins_dir, username, plugin_id,
                              download_cache)
 
     if changed:

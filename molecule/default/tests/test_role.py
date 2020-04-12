@@ -13,7 +13,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 ])
 def test_plugins_installed(host, plugin_dir_name):
     plugins_dir_pattern = (
-        '\\.(IdeaIC|IntelliJIdea)[0-9]+\\.[0-9]/config/plugins$')
+        '\\.local/share/JetBrains/(IdeaIC|IntelliJIdea)[0-9]+\\.[0-9]$')
     plugins_dir = host.check_output('find %s | grep --color=never -E %s',
                                     '/home/test_usr',
                                     plugins_dir_pattern)
@@ -27,12 +27,11 @@ def test_plugins_installed(host, plugin_dir_name):
 
 
 def test_jar_plugin_installed(host):
-    config_dir_pattern = '\\.(IdeaIC|IntelliJIdea)[0-9]+\\.[0-9]/config$'
-    config_home = host.check_output('find %s | grep --color=never -E %s',
+    config_dir_pattern = (
+        '\\.local/share/JetBrains/(IdeaIC|IntelliJIdea)[0-9]+\\.[0-9]$')
+    plugins_dir = host.check_output('find %s | grep --color=never -E %s',
                                     '/home/test_usr',
                                     config_dir_pattern)
-
-    plugins_dir = config_home + '/plugins/'
 
     sa_plugin_pattern = 'intellij-plugin-save-actions-v?[0-9\\.\\+]+.jar'
     plugin_path = host.check_output('find %s | grep --color=never -E %s',

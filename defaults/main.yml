@@ -2,8 +2,8 @@
 # Home directory of IntelliJ IDEA installation
 intellij_plugins_intellij_home: '{{ ansible_local.intellij.general.home }}'
 
-# Directory name of user specific IntelliJ IDEA files
-intellij_plugins_intellij_user_dirname: '{{ ansible_local.intellij.general.user_dirname }}'
+# Directory containing IntelliJ IDEA plugins (relative to user home)
+intellij_plugins_intellij_user_plugins_dir: '{{ ansible_local.intellij.general.user_plugins_dir }}'
 
 # Directory to store files downloaded for IntelliJ IDEA installation
 intellij_plugins_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
