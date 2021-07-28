@@ -3,7 +3,7 @@ import pytest
 
 @pytest.mark.parametrize('plugin_dir_name', [
     'google-java-format',
-    'lombok-plugin'
+    'MavenRunHelper'
 ])
 def test_plugins_installed(host, plugin_dir_name):
     plugins_dir_pattern = (

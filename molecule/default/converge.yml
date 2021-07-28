@@ -28,6 +28,6 @@
         - username: test_usr
           intellij_plugins:
             - google-java-format
-            - Lombook Plugin
+            - MavenRunHelper
             - com.dubreuia
         - username: test_usr2
