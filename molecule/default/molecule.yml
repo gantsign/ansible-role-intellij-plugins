@@ -15,7 +15,7 @@ platforms:
   - name: ansible-role-intellij-plugins-community-default
     groups:
       - community
-    image: ubuntu:18.04
+    image: ubuntu:20.04
 
 provisioner:
   name: ansible
