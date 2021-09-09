@@ -27,9 +27,9 @@ Requirements
 
     * RedHat Family
 
-        * CentOS
+        * Rocky Linux
 
-            * 7
+            * 8
 
     * Note: other versions are likely to work but have not been tested.
 
