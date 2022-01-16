@@ -16,7 +16,6 @@ platforms:
     groups:
       - community
     image: rockylinux/rockylinux:8
-    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible

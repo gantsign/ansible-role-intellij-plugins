@@ -16,7 +16,6 @@ platforms:
     groups:
       - ultimate
     image: ubuntu:18.04
-    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
