@@ -9,6 +9,12 @@
       changed_when: no
       when: "ansible_pkg_mgr == 'apt'"
 
+    - name: install find (dnf)
+      dnf:
+        name: findutils
+        state: present
+      when: "ansible_pkg_mgr == 'dnf'"
+
     - name: create test users
       become: yes
       user:
